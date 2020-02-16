@@ -1,18 +1,16 @@
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <FormLogin />
 </template>
 
 <script>
-import Home from "@/views/Home.vue";
+import FormLogin from "@/components/FormLogin.vue";
 export default {
-  name: "App",
-
+  name: "Login",
   components: {
-    Home
+    FormLogin
   }
 };
 </script>
+
 <style lang="scss" scoped>
 </style>
