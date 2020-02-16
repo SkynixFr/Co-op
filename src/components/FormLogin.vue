@@ -1,17 +1,17 @@
 <template>
   <v-container fluid class="auth">
     <v-row>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-icon size="50" color="primary">mdi-account-group</v-icon>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <p class="headline font-weight-bold">Se connecter à Co'op</p>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-text-field
             label="E-mail"
@@ -23,26 +23,26 @@
           ></v-text-field>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-text-field
             label="Mot de passe"
             outlined
             prepend-icon="mdi-lock"
             color="primary"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             :rules="[rules.required]"
             @click:append="showPassword = !showPassword"
           ></v-text-field>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-btn color="primary" dark>Se connecter</v-btn>
         </v-row>
       </v-col>
-      <v-col cols="12" md="4" offset="4">
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center" class="signin">
           <p>Nouveau sur Co'op ?</p>
           <router-link to="/signin">Créer un compte</router-link>
