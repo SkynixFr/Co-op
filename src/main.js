@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 window.axios = axios.create({
   baseURL: "https://tools.sopress.net/iut/coop/api/",
   headers: {
-    Authorization: "c62709aaf8bb867f465dc54d408014f5e8dfd3fe"
+    Authorization: "418c37dd13f975ff82d7073a4360a2ee8d961517"
   }
 });
 
