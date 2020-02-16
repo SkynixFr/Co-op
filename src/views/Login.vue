@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <h1>Login</h1>
-  </div>
+  <FormLogin />
 </template>
 
 <script>
+import FormLogin from "@/components/FormLogin.vue";
 export default {
-  name: "Login"
+  name: "Login",
+  components: {
+    FormLogin
+  }
 };
 </script>
 
