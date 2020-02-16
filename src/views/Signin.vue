@@ -1,17 +1,16 @@
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <FormSignin />
 </template>
 
 <script>
-import Home from "@/views/Home.vue";
+import FormSignin from "@/components/FormSignin.vue";
 export default {
-  name: "App",
+  name: "Signin",
   components: {
-    Home
+    FormSignin
   }
 };
 </script>
+
 <style lang="scss" scoped>
 </style>

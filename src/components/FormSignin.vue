@@ -8,7 +8,7 @@
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
-          <p class="headline font-weight-bold">Se connecter à Co'op</p>
+          <p class="headline font-weight-bold">S'inscrire sur Co'op</p>
         </v-row>
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
@@ -39,13 +39,21 @@
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
-          <v-btn color="primary" dark>Se connecter</v-btn>
+          <v-text-field
+            label="Confirmation du mot de passe"
+            outlined
+            prepend-icon="mdi-lock"
+            color="primary"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPassword ? 'text' : 'password'"
+            :rules="[rules.required]"
+            @click:append="showPassword = !showPassword"
+          ></v-text-field>
         </v-row>
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
-        <v-row justify="center" class="signin">
-          <p>Nouveau sur Co'op ?</p>
-          <router-link to="/signin">Créer un compte</router-link>
+        <v-row justify="center">
+          <v-btn color="primary" dark>Créer son compte</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -54,7 +62,7 @@
 
 <script>
 export default {
-  name: "FormLogin",
+  name: "FormSignin",
   data() {
     return {
       showPassword: false,
@@ -71,12 +79,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.signin {
-  p {
-    margin-right: 1%;
-  }
-  a {
-    text-decoration: none;
-  }
-}
 </style>

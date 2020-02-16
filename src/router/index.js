@@ -28,6 +28,18 @@ const routes = [
       }
     },
     component: () => import("@/views/Login.vue")
+  },
+  {
+    path: "/signin",
+    name: "Signin",
+    beforeEnter(to, from, next) {
+      if (store.state.isConnected) {
+        next("/");
+      } else {
+        next();
+      }
+    },
+    component: () => import("@/views/Signin.vue")
   }
 ];
 
