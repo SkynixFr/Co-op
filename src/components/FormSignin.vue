@@ -134,7 +134,7 @@ export default {
         this.password1 === "" ||
         this.password2 === ""
       ) {
-        this.setError("Les champs ne sont pas remplis");
+        this.setError("Les champs ne sont pas remplis !");
       } else if (this.emailPattern === false) {
         this.setError("L'adresse e-mail n'est pas correcte !");
       } else if (this.password1.length < 8 || this.password2.length < 8) {

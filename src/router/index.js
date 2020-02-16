@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    beforeEnter(to, from, next) {
+    beforeRouteEnter(to, from, next) {
       if (store.state.isConnected) {
         next("/");
       } else {
@@ -32,11 +32,11 @@ const routes = [
   {
     path: "/signin",
     name: "Signin",
-    beforeEnter(to, from, next) {
+    beforeRouteEnter(to, from, next) {
       if (store.state.isConnected) {
         next("/");
       } else {
-        next();
+        next("/signin");
       }
     },
     component: () => import("@/views/Signin.vue")

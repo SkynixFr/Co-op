@@ -13,9 +13,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [vp.plugin],
   state: {
-    isConnected: false
+    isConnected: false,
+    member: "",
+    memberTokenSession: ""
   },
-  mutations: {},
+  mutations: {
+    login(state, data) {
+      state.isConnected = true;
+      state.member = data.member;
+      state.memberTokenSession = data.token;
+    }
+  },
   actions: {},
   modules: {}
 });

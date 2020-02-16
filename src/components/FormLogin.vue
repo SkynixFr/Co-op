@@ -20,6 +20,7 @@
             prepend-icon="mdi-at"
             color="primary"
             :rules="[rules.required, rules.email]"
+            v-model="email"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -32,14 +33,26 @@
             color="primary"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
-            :rules="[rules.required]"
+            :rules="[rules.required, rules.min]"
             @click:append="showPassword = !showPassword"
+            v-model="password"
           ></v-text-field>
         </v-row>
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
-          <v-btn color="primary" dark>Se connecter</v-btn>
+          <v-alert
+            type="error"
+            :value="showError"
+            transition="scale-transition"
+          >
+            {{ error }}
+          </v-alert>
+        </v-row>
+      </v-col>
+      <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
+        <v-row justify="center">
+          <v-btn color="primary" dark @click="login">Se connecter</v-btn>
         </v-row>
       </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
@@ -58,14 +71,49 @@ export default {
   data() {
     return {
       showPassword: false,
+      showError: false,
+      emailPattern: "",
+      email: "",
+      password: "",
+      error: "",
       rules: {
         required: value => !!value || "Ce champs est requis",
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          this.emailPattern = pattern.test(value);
           return pattern.test(value) || "E-mail invalide";
-        }
+        },
+        min: value => value.length >= 8 || "Minimum 8 caractères"
       }
     };
+  },
+  methods: {
+    setError(message) {
+      this.error = message;
+      this.showError = true;
+      setTimeout(() => {
+        this.error = "";
+        this.showError = false;
+      }, 2000);
+    },
+    login() {
+      let parameters = {
+        email: this.email,
+        password: this.password
+      };
+      if (parameters.email === "" || parameters.password === "") {
+        this.setError("Les champs ne sont pas remplis !");
+      } else if (this.emailPattern === false) {
+        this.setError("L'adresse e-mail n'est pas correcte !");
+      } else if (parameters.password.length < 8) {
+        this.setError("Le mot de passe n'a pas assez de caratères !");
+      } else {
+        axios.post("members/signin", parameters).then(response => {
+          this.$store.commit("login", response.data);
+          this.$router.push("/");
+        });
+      }
+    }
   }
 };
 </script>
