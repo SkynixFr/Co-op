@@ -28,7 +28,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-tooltip-padding {
-  padding: 20px 50px;
-}
 </style>

@@ -14,7 +14,7 @@
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-text-field
-            label="Nom"
+            label="Nom + prenom"
             outlined
             clearable
             prepend-icon="mdi-pencil-box"

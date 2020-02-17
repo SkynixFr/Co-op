@@ -1,20 +1,20 @@
 <template>
-  <v-app>
-    <Menu />
-    <router-view />
-  </v-app>
+  <div>
+    <FormDiscussion />
+  </div>
 </template>
 
 <script>
 import Menu from "@/components/Navbar.vue";
-import Home from "@/views/Home.vue";
+import FormDiscussion from "@/components/FormDiscussion.vue";
 export default {
-  name: "App",
+  name: "discussion",
   components: {
-    Home,
+    FormDiscussion,
     Menu
   }
 };
 </script>
+
 <style lang="scss" scoped>
 </style>

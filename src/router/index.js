@@ -40,6 +40,18 @@ const routes = [
       }
     },
     component: () => import("@/views/Signin.vue")
+  },
+  {
+    path: "/discussion",
+    name: "Discussion",
+    beforeRouteEnter(to, from, next) {
+      if (!store.state.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
+    component: () => import("@/views/Discussion.vue")
   }
 ];
 
