@@ -5,13 +5,11 @@
 </template>
 
 <script>
-import Menu from "@/components/Navbar.vue";
 import FormDiscussion from "@/components/FormDiscussion.vue";
 export default {
-  name: "discussion",
+  name: "Discussion",
   components: {
-    FormDiscussion,
-    Menu
+    FormDiscussion
   }
 };
 </script>

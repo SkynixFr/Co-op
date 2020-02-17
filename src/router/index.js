@@ -44,7 +44,7 @@ const routes = [
   {
     path: "/discussion",
     name: "Discussion",
-    beforeRouteEnter(to, from, next) {
+    beforeEnter(to, from, next) {
       if (!store.state.isConnected) {
         next("/login");
       } else {

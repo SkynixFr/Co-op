@@ -24,8 +24,8 @@ new Vue({
   beforeCreate() {
     window.axios.interceptors.request.use(
       config => {
-        if (this.$store.state.memberToken_session) {
-          config.url += "?token=" + this.$store.state.memberToken_session;
+        if (this.$store.state.memberTokenSession) {
+          config.url += "?token=" + this.$store.state.memberTokenSession;
         }
         return config;
       },
