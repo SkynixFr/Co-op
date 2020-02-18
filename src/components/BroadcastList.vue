@@ -5,8 +5,15 @@
     </v-toolbar>
     <v-list three-line subheader>
       <v-list-item-group color="red">
-        <v-list-item v-for="(discussion, id) in discussions" :key="id">
-          <v-list-item-content>
+        <v-list-item
+          v-for="(discussion, id) in discussions"
+          :key="id"
+          :to="{
+            name: 'Discussions',
+            params: { id: discussion.id }
+          }"
+        >
+          <v-list-item-content to="/discussion">
             <v-list-item-title v-html="discussion.label"></v-list-item-title>
             <v-list-item-subtitle
               v-html="discussion.topic"
@@ -25,6 +32,16 @@ export default {
     return {
       discussions: []
     };
+  },
+  methods: {
+    getAllDiscussions() {
+      axios.get("channels").then(response => {
+        this.discussions = response.data;
+      });
+    }
+  },
+  mounted() {
+    this.getAllDiscussions();
   }
 };
 </script>

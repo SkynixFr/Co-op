@@ -1,13 +1,13 @@
 <template>
-  <ListDiscussion />
+  <BroadcastList />
 </template>
 
 <script>
-import ListDiscussion from "@/components/ListDiscussion.vue";
+import BroadcastList from "@/components/BroadcastList.vue";
 export default {
   name: "Home",
   components: {
-    ListDiscussion
+    BroadcastList
   }
 };
 </script>

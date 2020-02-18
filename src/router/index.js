@@ -52,6 +52,11 @@ const routes = [
       }
     },
     component: () => import("@/views/Discussion.vue")
+  },
+  {
+    path: "/discussions/:id",
+    name: "Discussions",
+    component: () => import("@/views/Home.vue")
   }
 ];
 
