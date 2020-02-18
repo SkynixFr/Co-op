@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="30%" height="auto" tile>
+  <v-card tile>
     <v-toolbar color="primary" dark>
       <v-toolbar-title> <v-icon>mdi-forum</v-icon> Discussions</v-toolbar-title>
     </v-toolbar>
@@ -13,7 +13,7 @@
             params: { id: discussion.id }
           }"
         >
-          <v-list-item-content to="/discussion">
+          <v-list-item-content>
             <v-list-item-title v-html="discussion.label"></v-list-item-title>
             <v-list-item-subtitle
               v-html="discussion.topic"
