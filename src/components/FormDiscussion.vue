@@ -103,7 +103,6 @@ export default {
       } else {
         axios.post("channels", parameters).then(response => {
           this.$router.push("/");
-          console.log(response.data);
         });
       }
     }

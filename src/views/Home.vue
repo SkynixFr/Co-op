@@ -1,11 +1,13 @@
-<template> </template>
+<template>
+  <ListDiscussion />
+</template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+import ListDiscussion from "@/components/ListDiscussion.vue";
 export default {
   name: "Home",
   components: {
-    Navbar
+    ListDiscussion
   }
 };
 </script>
