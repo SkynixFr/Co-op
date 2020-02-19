@@ -9,7 +9,12 @@
         <span>Discussion</span>
         <v-icon>mdi-forum</v-icon>
       </v-btn>
-      <v-btn to="/profile">
+      <v-btn
+        :to="{
+          name: 'Profile',
+          params: { id: $store.state.member.id }
+        }"
+      >
         <span>Profile</span>
         <v-icon>mdi-account-box</v-icon>
       </v-btn>

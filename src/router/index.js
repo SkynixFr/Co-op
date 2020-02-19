@@ -57,6 +57,18 @@ const routes = [
     path: "/discussions/:id",
     name: "Discussions",
     component: () => import("@/views/Home.vue")
+  },
+  {
+    path: "/profile/:id",
+    name: "Profile",
+    beforeEnter(to, from, next) {
+      if (!store.state.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
+    component: () => import("@/views/Profile.vue")
   }
 ];
 

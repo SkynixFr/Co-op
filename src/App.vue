@@ -13,6 +13,11 @@ export default {
   components: {
     Home,
     Menu
+  },
+  mounted() {
+    axios.get("members").then(response => {
+      this.$store.commit("setMembres", response.data);
+    });
   }
 };
 </script>

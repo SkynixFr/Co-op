@@ -14,6 +14,9 @@ window.axios = axios.create({
   }
 });
 
+import { outils } from "./outils";
+Vue.mixin(outils);
+
 new Vue({
   router,
   store,

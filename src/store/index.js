@@ -15,9 +15,13 @@ export default new Vuex.Store({
   state: {
     isConnected: false,
     member: "",
-    memberTokenSession: ""
+    memberTokenSession: "",
+    members: []
   },
   mutations: {
+    setMembres(state, members) {
+      state.members = members;
+    },
     login(state, data) {
       state.isConnected = true;
       state.member = data.member;
