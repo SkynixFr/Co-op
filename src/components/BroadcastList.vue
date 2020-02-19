@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { bus } from "../main";
 export default {
   name: "ListDiscussion",
   data() {
@@ -45,7 +46,8 @@ export default {
     getOnBroadcastMessages() {
       axios.get("channels/" + this.broadcasts.id + "/posts").then(response => {
         this.messages = response.data.reverse();
-        console.log(this.messages);
+        console.log(this.messages, "Broadcast List");
+        bus.$emit("getMessages", this.messages);
       });
     }
   },

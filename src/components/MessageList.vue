@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { bus } from "../main";
 import Message from "@/components/Message.vue";
 export default {
   name: "MessageList",
@@ -47,12 +48,14 @@ export default {
     sendMessage() {
       let parameters = {
         memberId: this.$store.state.member.id,
-        message: this.inputMessage
+        message: this.inputMessage,
+        messages: []
       };
       axios
         .post("channels/" + this.broadcastId + "/posts", parameters)
         .then(response => {
           console.log(response.data);
+          console.log(this.messages, "Message List");
           this.messages.push(response.data);
         });
     }
@@ -63,6 +66,11 @@ export default {
         this.broadcastId = this.$route.params.id;
       }
     }
+  },
+  created() {
+    bus.$on("getMessages", data => {
+      this.messages = data;
+    });
   },
   mounted() {
     if (this.$route.params.id) {
