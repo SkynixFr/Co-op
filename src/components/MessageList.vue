@@ -3,37 +3,12 @@
     <v-toolbar color="primary" dark>
       <v-toolbar-title> <v-icon>mdi-forum</v-icon> Discussion </v-toolbar-title>
     </v-toolbar>
-    <v-row justify="end">
+    <v-row v-for="message in messages" :key="message.id">
       <v-col cols="12" md="auto">
-        <div class="message">
-          <div class="text">
-            <p>Nom utilisateur</p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            quibusdam deleniti cumque! Commodi, nisi corrupti consectetur
-            officiis amet non? Quos fugiat nesciunt quas recusandae dolorem
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime,
-            minima. Eligendi quae iure voluptatem tenetur rem nulla officia unde
-            laudantium corrupti quas dolore explicabo dicta, doloremque placeat
-            dignissimos consequatur dolor. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Adipisci, eos distinctio? Voluptatum
-            cumque unde, sit, enim delectus porro earum veniam libero, similique
-            commodi accusamus! Culpa magnam corrupti amet id voluptatum? ipsam
-            nobis eius non eligendi.
-          </div>
-        </div>
+        <Message :broadcast="broadcastId" :content="message.message" />
       </v-col>
     </v-row>
-    <v-row justify="start">
-      <v-col cols="12" md="auto">
-        <div class="message">
-          <div class="text">
-            <p>Nom utilisateur</p>
-            ls
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-
+    {{ broadcastId }}
     <v-row justify="center" no-gutters>
       <v-col cols="12" md="11">
         <v-text-field
@@ -47,6 +22,7 @@
           prepend-icon="mdi-emoticon"
           append-outer-icon="mdi-send"
           @click:append-outer="sendMessage"
+          v-model="inputMessage"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -54,24 +30,47 @@
 </template>
 
 <script>
+import Message from "@/components/Message.vue";
 export default {
   name: "MessageList",
+  components: {
+    Message
+  },
+  props: ["messages"],
   data() {
-    return {};
+    return {
+      broadcastId: "",
+      inputMessage: ""
+    };
   },
   methods: {
     sendMessage() {
-      console.log("Hello");
+      let parameters = {
+        memberId: this.$store.state.member.id,
+        message: this.inputMessage
+      };
+      axios
+        .post("channels/" + this.broadcastId + "/posts", parameters)
+        .then(response => {
+          console.log(response.data);
+          this.messages.push(response.data);
+        });
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (this.$route.params.id) {
+        this.broadcastId = this.$route.params.id;
+      }
+    }
+  },
+  mounted() {
+    if (this.$route.params.id) {
+      this.broadcastId = this.$route.params.id;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.message {
-  margin: 1%;
-  padding: 15px;
-  background-color: #a8ddfd;
-  border-radius: 28px;
-}
 </style>

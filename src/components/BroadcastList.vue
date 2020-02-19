@@ -6,17 +6,19 @@
     <v-list three-line subheader>
       <v-list-item-group color="red">
         <v-list-item
-          v-for="(discussion, id) in discussions"
+          v-for="(broadcast, id) in broadcasts"
           :key="id"
           :to="{
             name: 'Discussions',
-            params: { id: discussion.id }
+            params: { id: broadcast.id }
           }"
+          :messages="messages"
+          @click="getOnBroadcastMessages"
         >
           <v-list-item-content>
-            <v-list-item-title v-html="discussion.label"></v-list-item-title>
+            <v-list-item-title v-html="broadcast.label"></v-list-item-title>
             <v-list-item-subtitle
-              v-html="discussion.topic"
+              v-html="broadcast.topic"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -30,18 +32,25 @@ export default {
   name: "ListDiscussion",
   data() {
     return {
-      discussions: []
+      broadcasts: [],
+      messages: []
     };
   },
   methods: {
-    getAllDiscussions() {
+    getAllBroadcast() {
       axios.get("channels").then(response => {
-        this.discussions = response.data;
+        this.broadcasts = response.data;
+      });
+    },
+    getOnBroadcastMessages() {
+      axios.get("channels/" + this.broadcasts.id + "/posts").then(response => {
+        this.messages = response.data.reverse();
+        console.log(this.messages);
       });
     }
   },
   mounted() {
-    this.getAllDiscussions();
+    this.getAllBroadcast();
   }
 };
 </script>
