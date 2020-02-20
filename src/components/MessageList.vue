@@ -8,7 +8,6 @@
         <Message :broadcast="broadcastId" :content="message.message" />
       </v-col>
     </v-row>
-    {{ broadcastId }}
     <v-row justify="center" no-gutters>
       <v-col cols="12" md="11">
         <v-text-field
