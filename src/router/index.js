@@ -69,6 +69,18 @@ const routes = [
       }
     },
     component: () => import("@/views/Profile.vue")
+  },
+  {
+    path: "/members",
+    name: "Members",
+    beforeEnter(to, from, next) {
+      if (!store.state.isConnected) {
+        next("/login");
+      } else {
+        next();
+      }
+    },
+    component: () => import("@/views/Members.vue")
   }
 ];
 
