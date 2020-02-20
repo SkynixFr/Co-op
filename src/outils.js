@@ -7,10 +7,10 @@ export const outils = {
           return members[i];
         }
       }
+    },
+    getGravatar(members) {
+      let hash = md5(members.email);
+      return "https://avatars.dicebear.com/v2/bottts/" + hash + ".svg";
     }
-    // getGravatar(members) {
-    //   let hash = md5(members.email);
-    //   return "https://avatars.dicebear.com/v2/bottts/" + hash + ".svg";
-    // }
   }
 };

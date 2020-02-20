@@ -22,7 +22,8 @@
           }"
         >
           <v-list-item three-line>
-            <v-list-item-avatar tile size="80" color="grey">
+            <v-list-item-avatar tile size="80">
+              <img :src="getGravatar(member)" alt="" width="250" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="headline mb-1">

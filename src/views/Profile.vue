@@ -14,11 +14,9 @@
               </v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-avatar
-              tile
-              size="100"
-              color="grey"
-            ></v-list-item-avatar>
+            <v-list-item-avatar tile size="100">
+              <img :src="getGravatar(member)" alt="" width="250" />
+            </v-list-item-avatar>
           </v-list-item>
 
           <v-card-actions>
@@ -40,9 +38,6 @@ export default {
     return {
       member: this.getMember(this.$route.params.id)
     };
-  },
-  mounted() {
-    console.log(this.getMember(this.$route.params.id));
   }
 };
 </script>
