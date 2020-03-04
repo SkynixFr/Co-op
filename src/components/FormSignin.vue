@@ -1,6 +1,13 @@
 <template>
   <v-container fluid class="auth">
     <v-row>
+      <v-col cols="12" md="12" sm="12">
+        <v-row>
+          <v-btn icon to="/login">
+            <v-icon size="40" color="primary">mdi-arrow-left</v-icon>
+          </v-btn>
+        </v-row>
+      </v-col>
       <v-col cols="12" md="6" offset-md="3" sm="8" offset-sm="2">
         <v-row justify="center">
           <v-icon size="50" color="primary">mdi-account-group</v-icon>
@@ -21,6 +28,7 @@
             color="primary"
             :rules="[rules.required]"
             v-model="name"
+            v-on:keyup.enter="signIn"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -34,6 +42,7 @@
             color="primary"
             :rules="[rules.required, rules.email]"
             v-model="email"
+            v-on:keyup.enter="signIn"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -50,6 +59,7 @@
             :rules="[rules.required, rules.min]"
             @click:append="showPassword = !showPassword"
             v-model="password1"
+            v-on:keyup.enter="signIn"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -61,11 +71,12 @@
             prepend-icon="mdi-lock"
             color="primary"
             counter
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPassword ? 'text' : 'password'"
+            :append-icon="showPassword2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPassword2 ? 'text' : 'password'"
             :rules="[rules.required, rules.min]"
-            @click:append="showPassword = !showPassword"
+            @click:append="showPassword2 = !showPassword2"
             v-model="password2"
+            v-on:keyup.enter="signIn"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -95,6 +106,7 @@ export default {
   data() {
     return {
       showPassword: false,
+      showPassword2: false,
       showError: false,
       emailPattern: "",
       name: "",

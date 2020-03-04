@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Menu />
+    <Menu v-if="this.$store.state.isConnected" />
     <v-btn
       fixed
       bottom
@@ -10,6 +10,7 @@
       dark
       depressed
       @click="logOut"
+      v-if="this.$store.state.isConnected"
     >
       <v-icon color="white">mdi-logout</v-icon>
     </v-btn>
@@ -29,6 +30,7 @@ export default {
   methods: {
     logOut() {
       axios.delete("members/signout").then(response => {
+        this.$store.commit("logout", response.data);
         this.$router.push("/login");
       });
     }

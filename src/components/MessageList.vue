@@ -1,11 +1,16 @@
 <template>
-  <v-card tile>
+  <v-card tile v-show="isShow">
     <v-toolbar color="primary" dark>
       <v-toolbar-title> <v-icon>mdi-forum</v-icon> Discussion </v-toolbar-title>
     </v-toolbar>
-    <v-row v-for="message in messages" :key="message.id">
+    <v-row>
       <v-col cols="12" md="auto">
-        <Message :broadcast="broadcastId" :content="message.message" />
+        <Message
+          v-for="message in messages"
+          :key="message.id"
+          :broadcast="broadcastId"
+          :message="message"
+        />
       </v-col>
     </v-row>
     <v-row justify="center" no-gutters>
@@ -22,6 +27,7 @@
           append-outer-icon="mdi-send"
           @click:append-outer="sendMessage"
           v-model="inputMessage"
+          v-on:keyup.enter="sendMessage"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -36,11 +42,12 @@ export default {
   components: {
     Message
   },
-  props: ["messages"],
   data() {
     return {
       broadcastId: "",
-      inputMessage: ""
+      inputMessage: "",
+      messages: [],
+      isShow: false
     };
   },
   methods: {
@@ -53,9 +60,8 @@ export default {
       axios
         .post("channels/" + this.broadcastId + "/posts", parameters)
         .then(response => {
-          console.log(response.data);
-          console.log(this.messages, "Message List");
           this.messages.push(response.data);
+          this.inputMessage = "";
         });
     }
   },
@@ -69,6 +75,7 @@ export default {
   created() {
     bus.$on("getMessages", data => {
       this.messages = data;
+      this.isShow = true;
     });
   },
   mounted() {

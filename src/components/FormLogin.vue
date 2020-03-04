@@ -21,6 +21,7 @@
             color="primary"
             :rules="[rules.required, rules.email]"
             v-model="email"
+            v-on:keyup.enter="login"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -36,6 +37,7 @@
             :rules="[rules.required, rules.min]"
             @click:append="showPassword = !showPassword"
             v-model="password"
+            v-on:keyup.enter="login"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -108,10 +110,17 @@ export default {
       } else if (parameters.password.length < 8) {
         this.setError("Le mot de passe n'a pas assez de caratères !");
       } else {
-        axios.post("members/signin", parameters).then(response => {
-          this.$store.commit("login", response.data);
-          this.$router.push("/");
-        });
+        axios
+          .post("members/signin", parameters)
+          .then(response => {
+            this.$store.commit("login", response.data);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            this.setError(
+              "Le mot de passe ou l'adresse mail ne sont pas correct"
+            );
+          });
       }
     }
   }

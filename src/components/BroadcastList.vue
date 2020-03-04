@@ -12,8 +12,7 @@
             name: 'Discussions',
             params: { id: broadcast.id }
           }"
-          :messages="messages"
-          @click="getOnBroadcastMessages"
+          @click="getOnBroadcastMessages(broadcast.id)"
         >
           <v-list-item-content>
             <v-list-item-title>
@@ -39,8 +38,7 @@ export default {
   name: "ListDiscussion",
   data() {
     return {
-      broadcasts: [],
-      messages: []
+      broadcasts: []
     };
   },
   methods: {
@@ -49,13 +47,10 @@ export default {
         this.broadcasts = response.data;
       });
     },
-    getOnBroadcastMessages() {
-      axios
-        .get("channels/" + this.$route.params.id + "/posts")
-        .then(response => {
-          this.messages = response.data.reverse();
-          bus.$emit("getMessages", this.messages);
-        });
+    getOnBroadcastMessages(id) {
+      axios.get("channels/" + id + "/posts").then(response => {
+        bus.$emit("getMessages", response.data.reverse());
+      });
     },
     deleteBroadcast(id) {
       axios.delete("channels/" + id).then(response => {
@@ -63,7 +58,15 @@ export default {
       });
     }
   },
+  created() {
+    bus.$on("updateMessage", update => {
+      this.getOnBroadcastMessages(this.$route.params.id);
+    });
+  },
   mounted() {
+    if (this.$route.params.id) {
+      this.getOnBroadcastMessages(this.$route.params.id);
+    }
     this.getAllBroadcast();
   }
 };

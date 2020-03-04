@@ -23,6 +23,7 @@
             color="primary"
             :rules="[rules.required, rules.minTitle]"
             v-model="title"
+            v-on:keyup.enter="addDiscussion"
           ></v-text-field>
         </v-row>
       </v-col>
@@ -38,6 +39,7 @@
             :rules="[rules.required, rules.minDescription]"
             v-model="description"
             counter
+            v-on:keyup.enter="addDiscussion"
           ></v-textarea>
         </v-row>
       </v-col>
