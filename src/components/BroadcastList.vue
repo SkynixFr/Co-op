@@ -17,7 +17,7 @@
           <v-list-item-content>
             <v-list-item-title>
               {{ broadcast.label }}
-              <v-btn icon><v-icon>mdi-pencil</v-icon></v-btn>
+              <v-btn icon @click="openModal"><v-icon>mdi-pencil</v-icon></v-btn>
               <v-btn icon @click="deleteBroadcast(broadcast.id)"
                 ><v-icon>mdi-delete-forever</v-icon></v-btn
               >
@@ -38,7 +38,8 @@ export default {
   name: "ListDiscussion",
   data() {
     return {
-      broadcasts: []
+      broadcasts: [],
+      showModal: false
     };
   },
   methods: {
@@ -56,6 +57,9 @@ export default {
       axios.delete("channels/" + id).then(response => {
         this.getAllBroadcast();
       });
+    },
+    openModal() {
+      this.showModal = true;
     }
   },
   created() {

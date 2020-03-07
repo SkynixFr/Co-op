@@ -18,12 +18,6 @@
               <img :src="getGravatar(member)" alt="" width="250" />
             </v-list-item-avatar>
           </v-list-item>
-          <v-card-actions>
-            <v-btn icon color="primary"><v-icon>mdi-twitter</v-icon></v-btn>
-            <v-btn icon color="indigo darken-2">
-              <v-icon>mdi-facebook-messenger</v-icon>
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="12" sm="12" md="10" offset-md="1">
@@ -92,9 +86,16 @@ a {
 ul {
   list-style: none;
   .text-message {
+    border: 1px solid grey;
     padding: 1%;
+    margin: 1%;
     font-size: 1em;
     font-weight: 300;
+    &:hover {
+      background-color: #f5f5f5;
+      color: #1976d2;
+      border: 1px solid #1976d2;
+    }
   }
 }
 </style>

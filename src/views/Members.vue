@@ -28,6 +28,9 @@
             <v-list-item-content>
               <v-list-item-title class="headline mb-1">
                 {{ member.fullname }}
+                <v-btn icon v-if="member.id != memberConnect">
+                  <v-icon @click="deleteMember(member.id)">mdi-delete</v-icon>
+                </v-btn>
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ member.created_at }}
@@ -45,8 +48,16 @@ export default {
   name: "Members",
   data() {
     return {
-      members: []
+      members: [],
+      memberConnect: this.$store.state.member.id
     };
+  },
+  methods: {
+    deleteMember(id) {
+      axios.delete("members/" + id).then(response => {
+        this.members = response.data;
+      });
+    }
   },
   mounted() {
     axios.get("members").then(response => {
