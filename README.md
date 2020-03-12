@@ -15,9 +15,6 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 
 ### Bug & fonctionnalités manquantes
 La modification d'un message ne fonctionne pas. La modification d'une discussion n'est pas gérée.
