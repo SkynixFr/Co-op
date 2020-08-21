@@ -1,8 +1,21 @@
-# co-op
+# Co-op
 
-## Project setup
-```
+Co-op est une application de messagerie similaire à Slack. Ce projet est partagé en deux parties : 
+
+  - En Back-End une API développée par mon professeur de Licence Professionnelle.
+  - En Front-End un framework : Vue.js. 
+ 
+
+## Build setup
+```PHP
+# install dependencies
 npm install
+
+# serve with hot reload for development
+npm run serve
+
+# minifies for production
+npm run build
 ```
 
 ### Compiles and hot-reloads for development
